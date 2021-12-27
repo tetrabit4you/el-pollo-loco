@@ -7,5 +7,5 @@ function init() {
     this.ctx = world = new World(canvas);
     ctx = canvas.getContext('2d');
 
-    //setTimeout(() => { world.draw(); }, 1000);
+    setTimeout(() => { world.draw(); }, 1000);
 }

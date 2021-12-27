@@ -5,8 +5,16 @@ class World {
     enemies = [
         new Chicken(),
         new Chicken(),
-        new Chicken()
+        new Chicken(),
     ];
+    clouds = [
+        new Cloud()
+    ];
+
+    BackgroundsObjects = [
+        new BackgroundsObjects('img/5.Fondo/1.png')
+    ];
+
 
     canvas;
     ctx;
@@ -19,16 +27,38 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
-        this.enemies.forEach(enemy => {
-            this.ctx.drawImage(this.enemy.img, this.enemy.x, this.enemy.y, this.enemy.width, this.enemy.height);
 
+        this.addToMap(this.character);
+        //this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.width, this.character.height);
+
+        this.addObjectsToMap(this.enemies);
+        /* this.enemies.forEach(enemy => {
+            this.addToMap(enemy);
         });
+ */
+
+        this.addObjectsToMap(this.clouds);
+        /* 
+                this.clouds.forEach(cloud => {
+                    this.addToMap(cloud);
+                }); */
+
+        this.addObjectsToMap(this.BackgroundsObjects);
 
         //Draw wird immer wieder aufgerufen...
         let self = this;
         requestAnimationFrame(function() {
             self.draw();
         });
+    }
+
+    addObjectsToMap(objects) {
+        objects.forEach(o => {
+            this.addToMap(o);
+        });
+    }
+
+    addToMap(obj) {
+        this.ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height);
     }
 }
