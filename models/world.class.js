@@ -21,11 +21,19 @@ class World {
 
     canvas;
     ctx;
+    keyboard;
+
     constructor(canvas) {
         //super().loadImage('../img/5.Fondo/Capas/1.suelo-fondo1/1.png');
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
+        this.keyboard = keyboard;
         this.draw();
+        this.setWorld();
+    }
+
+    setWorld() {
+        this.character.world = this;
     }
 
     draw() {
@@ -54,6 +62,15 @@ class World {
     }
 
     addToMap(obj) {
+        if (obj.otherDirection) {
+            this.ctx.save();
+            this.ctx.translate(obj.img.width, 0);
+            this.ctx.scale(-1, 1);
+        }
+
         this.ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height);
+        if (obj.otherDirection) {
+            this.ctx.restore();
+        }
     }
 }
